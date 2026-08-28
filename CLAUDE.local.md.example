@@ -1,0 +1,29 @@
+# CLAUDE.local.md (personal, not committed)
+
+Copy this to `CLAUDE.local.md`. It is gitignored. Put anything here that is about
+*you*, not about the project. Team-wide rules belong in `CLAUDE.md`.
+
+## My environment
+
+- OS: macOS 15 / Apple Silicon
+- Python via `uv`, Node via `fnm`
+- Postgres runs in Docker, not locally installed
+- Editor: VS Code. Open files with `code -r <path>` when you need me to look at something.
+
+## How I like to work
+
+- Explain the plan before writing code. I approve, then you build.
+- Small commits. One logical change each.
+- When you are unsure between two designs, show me both with a recommendation.
+- Prefer boring, obvious code over clever code.
+- Do not add a dependency without asking.
+
+## Personal shortcuts
+
+- My scratch dir is `~/scratch`. Throwaway experiments go there, not in the repo.
+- I keep Portkey and OpenAI keys in my shell profile, not in `.env`.
+
+## Context I keep forgetting to tell you
+
+- This is a learning project first, a product second. Favor clarity that teaches me
+  the pattern over the most compact possible implementation.

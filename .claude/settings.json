@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "model": "sonnet",
+  "autoMemoryEnabled": true,
+  "autoMemoryDirectory": "~/.claude/memory/claims-copilot-starter",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Bash(make lint)",
+      "Bash(make test)",
+      "Bash(make eval)",
+      "Bash(make migrate)",
+      "Bash(make ingest)",
+      "Bash(ruff *)",
+      "Bash(mypy *)",
+      "Bash(pytest *)",
+      "Bash(uv *)",
+      "Bash(docker compose ps)",
+      "Bash(docker compose up -d)",
+      "Bash(docker compose logs *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(sudo *)",
+      "Bash(git push *)",
+      "Bash(git reset --hard *)",
+      "Bash(docker compose down -v)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/*.pem)",
+      "Read(./**/*.key)",
+      "Read(./.claude/memory/prompt-journal.md)",
+      "Write(./.env)",
+      "Write(./data/production/**)",
+      "Write(./.claude/memory/prompt-journal.md)",
+      "Write(./.claude/memory/session-index.md)",
+      "Write(./.claude/memory/change-log.md)"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": ".claude/hooks/capture-prompt.sh" }]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": ".claude/hooks/session-summary.sh" }]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [{ "type": "command", "command": ".claude/hooks/guard-bash.sh" }]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [{ "type": "command", "command": ".claude/hooks/block-secrets.sh" }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          { "type": "command", "command": ".claude/hooks/format-python.sh" },
+          { "type": "command", "command": ".claude/hooks/log-changes.sh" }
+        ]
+      }
+    ]
+  }
+}
