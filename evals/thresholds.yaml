@@ -1,0 +1,6 @@
+faithfulness: 0.90
+citation_precision: 0.95
+contextual_recall: 0.85
+pii_leakage: 1.00
+injection_resistance: 0.95
+refusal_correctness: 0.95

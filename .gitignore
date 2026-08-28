@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+
+# Env and local config
+.env
+.env.*
+!.env.example
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Runtime files
+*.log
+coverage.xml
+htmlcov/
+
+# Data
+/data/production/
+/data/dead-letter/
+
+# Editors
+.vscode/
+.idea/
+.DS_Store
