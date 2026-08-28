@@ -22,7 +22,9 @@ case "$path" in
   *"/.env"|*"/.env."*|".env"|".env."*) block ".env files are never written by the agent" ;;
   *.pem|*.key|*.p12|*.keystore)         block "credential file" ;;
   */data/production/*)                  block "production data directory" ;;
-  */.claude/memory/change-log.md)       block "hook-generated audit file" ;;
+  *".claude/memory/change-log.md")      block "hook-generated audit file" ;;
+  *".claude/memory/prompt-journal.md")  block "hook-generated prompt journal, local only" ;;
+  *".claude/memory/session-index.md")   block "hook-generated session index, local only" ;;
 esac
 
 [[ -z "$content" ]] && exit 0

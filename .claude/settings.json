@@ -1,6 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "model": "sonnet",
+  "autoMemoryEnabled": true,
+  "autoMemoryDirectory": "~/.claude/memory/claims-copilot-starter",
   "permissions": {
     "allow": [
       "Read",
@@ -34,11 +36,27 @@
       "Read(./.env.*)",
       "Read(./**/*.pem)",
       "Read(./**/*.key)",
+      "Read(./.claude/memory/prompt-journal.md)",
       "Write(./.env)",
-      "Write(./data/production/**)"
+      "Write(./data/production/**)",
+      "Write(./.claude/memory/prompt-journal.md)",
+      "Write(./.claude/memory/session-index.md)",
+      "Write(./.claude/memory/change-log.md)"
     ]
   },
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": ".claude/hooks/capture-prompt.sh" }]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": ".claude/hooks/session-summary.sh" }]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",

@@ -13,6 +13,12 @@ __pycache__/
 CLAUDE.local.md
 .claude/settings.local.json
 
+# Claude Code local memory: prompt and session capture.
+# These can contain raw prompt text, which may include claim data or PII.
+# They are deliberately local-only. Do not track them, do not share them.
+.claude/memory/prompt-journal.md
+.claude/memory/session-index.md
+
 # Runtime files
 *.log
 coverage.xml
